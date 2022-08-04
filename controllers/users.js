@@ -19,3 +19,16 @@ module.exports.createUser = (req, res) => {
         .catch(err => res.status(500).send({message: 'Произошла ошибка'}))
 };
 
+module.exports.updateUserInfo = (req, res) => {
+    const { name, about } = req.body;
+    User.findByIdAndUpdate(req.user._id, {name, about}, {new: true, runValidators: true})
+        .then(updateUser => res.send({data: updateUser}))
+        .catch(err => res.status(500).send({message: 'Произошла ошибка'}))
+}
+
+module.exports.updateUserAvatar = (req, res) => {
+    const newAvatar = req.body.avatar;
+    User.findByIdAndUpdate(req.user._id, {avatar: newAvatar}, {new: true, runValidators: true})
+        .then(updateUser => res.send({data: updateUser}))
+        .catch(err => res.status(500).send({message: 'Произошла ошибка'}))
+}
