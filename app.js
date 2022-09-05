@@ -24,4 +24,8 @@ app.use('/cards', auth, cardsRoutes);
 app.use(errors());
 app.use(serverError);
 
+app.use((req, res) => {
+  res.status(404).send({ message: 'Страница не найдена' });
+});
+
 app.listen(PORT);
