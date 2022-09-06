@@ -6,6 +6,7 @@ const { PORT = 3000 } = process.env;
 const usersRoutes = require('./routes/users');
 const cardsRoutes = require('./routes/cards');
 const authRoutes = require('./routes/auth');
+const errorRoutes = require('./routes/error');
 const auth = require('./middlewares/auth');
 const serverError = require('./middlewares/serverError');
 
@@ -21,11 +22,8 @@ app.use(express.json());
 app.use('/', authRoutes);
 app.use('/users', auth, usersRoutes);
 app.use('/cards', auth, cardsRoutes);
+app.use('/', errorRoutes);
 app.use(errors());
 app.use(serverError);
-
-app.use((req, res) => {
-  res.status(404).send({ message: 'Страница не найдена' });
-});
 
 app.listen(PORT);

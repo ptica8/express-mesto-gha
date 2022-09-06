@@ -11,7 +11,7 @@ router.get('/', getCards);
 router.post('/', celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
-    link: Joi.string().required().pattern(avatarPattern).default('https://i.pinimg.com/736x/80/dd/b1/80ddb1e9dcead15d274ff746d385b8dd.jpg'),
+    link: Joi.string().required().pattern(avatarPattern),
   }),
 }), createCard);
 
