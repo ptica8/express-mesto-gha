@@ -44,7 +44,13 @@ module.exports.createUser = (req, res, next) => {
 
         .then((newUser) => {
           // eslint-disable-next-line no-shadow,no-underscore-dangle
-          res.send({ data: newUser });
+          res.send({
+            // eslint-disable-next-line max-len
+            data: {
+            // eslint-disable-next-line max-len
+              email: newUser.email, name: newUser.name, about: newUser.about, avatar: newUser.avatar, _id: newUser._id,
+            },
+          });
         })
         .catch((err) => {
           if (err.name === 'ValidationError') {
